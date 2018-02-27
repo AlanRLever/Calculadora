@@ -90,6 +90,52 @@ public class Calculos extends PilaA{
 
     }
 
+	public boolean revisorParentesisA(String leer){
+        PilaA<Character> revisor = new PilaA();
+        int n=0;
+	char a;
+        int cont=0;
+        
+        while(n<leer.length()){
+	    a=leer.charAt(n);
+            
+	    if(a=='('){
+	
+            revisor.push('(');
+
+            }
+	
+            else{
+        
+                if(a==')'&&!revisor.isEmpty()){
+                
+                    revisor.pop();
+                }
+            
+
+                else{
+                    if(a==')'&& revisor.isEmpty()){
+                      return false;
+                    }
+                   
+                }
+            }
+            n++;
+        }
+            
+        if(signo(a+" ")==1 || signo(a+" ")==2){
+            if(cont==1){
+                return false;
+            }
+            else{
+                cont++;
+            }
+        }
+        else{
+            cont--;
+        }
+        return (revisor.isEmpty() && cont==0);
+     }
     /**
      @param signo
      * Método que regresa la prioridad de un signo ante el orden de operaciones, regresa -1
